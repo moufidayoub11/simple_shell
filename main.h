@@ -19,7 +19,6 @@ extern char **environ;
 /**
  * struct list_s - singly linked list
  * @str: string
- * @index: the index of the node
  * @next: points to the next node
  *
  * Description: singly linked list node structure
@@ -32,10 +31,18 @@ typedef struct list_s
 
 /**
  * struct state_s - contains the state of the program
- * @env: linked list local copy of environ
- * @environ: custom modified copy of environ
- * @environ_changed: 1 if environ was changed
- * @status: the return status of the last exec'd command
+ * @env_list: linked list containing environment variables locally
+ * @environ: pointer to an array of strings
+ * representing the environment variables
+ * @line: buffer containing the current line of input
+ * @shell_name: name of the shell program
+ * @command: the command currently being processed
+ * @argv: arguments for the current command
+ * @line_count: count of lines processed so far
+ * @environ_changed: flag indicating whether
+ * the environment has been modified (1 if modified)
+ * @status: return status of the last executed command
+ * @exit_number: exit status to return when the program terminates
  */
 typedef struct state_s
 {
@@ -50,6 +57,7 @@ typedef struct state_s
 	int status;
 	int exit_number;
 } state_t;
+
 
 /**
  *struct builtin - contains a builtin string and related function
@@ -121,5 +129,6 @@ int myunsetenv(state_t *state);
 int shell_loop(state_t *state);
 char *get_line(state_t *state);
 char **get_commands(state_t *state);
+void sigint_handler(int signal);
 
 #endif

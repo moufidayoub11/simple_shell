@@ -12,6 +12,7 @@ int shell_loop(state_t *state)
 {
 	int built_in_ret = -1;
 
+	signal(SIGINT, sigint_handler);
 	while (1)
 	{
 		if (get_line(state) == NULL)
@@ -30,9 +31,9 @@ int shell_loop(state_t *state)
 				{
 					if (built_in_ret == -2)
 					{
-						if (state->exit_number != -1)
-							state->status = state->exit_number;
-						break;
+					if (state->exit_number != -1)
+						state->status = state->exit_number;
+					break;
 					}
 				}
 				else
@@ -120,4 +121,15 @@ char *get_line(state_t *state)
 	state->line = real_line;
 
 	return (real_line);
+}
+
+/**
+ * sigint_handler - handles the signal SIGINT
+ * @signal: signal to handle
+ */
+
+void sigint_handler(int signal)
+{
+	(void)signal;
+	write(STDOUT_FILENO, "\n$ ", 3);
 }
