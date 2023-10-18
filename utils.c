@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+ * free_array - Free a dynamically allocated string array.
+ * @array: Array of strings to free.
+ * @start: Starting index for freeing.
+ */
 void free_array(char **array, int start)
 {
 	int i;
@@ -12,6 +17,10 @@ void free_array(char **array, int start)
 	free(array);
 }
 
+/**
+ * print_array - Print an array of strings with indices.
+ * @array: Array of strings to be printed.
+ */
 void print_array(char **array)
 {
 	int i;
@@ -22,6 +31,10 @@ void print_array(char **array)
 	}
 }
 
+/**
+ * free_state - Free memory associated with a state_t structure.
+ * @state: Pointer to the state_t structure.
+ */
 void free_state(state_t *state)
 {
 	if (state == NULL)
