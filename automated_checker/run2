@@ -1,0 +1,80 @@
+#!/usr/bin/python3
+
+import os
+import subprocess
+import threading
+from concurrent.futures import ThreadPoolExecutor
+
+lock = threading.Lock()
+
+
+def is_bash_script(file_path):
+    """Check if the given file is a bash script."""
+    if not os.path.isfile(file_path):
+        return False
+    with open(file_path, "r") as f:
+        line = f.readline().strip()
+    return line in ["#!/usr/bin/env bash", "#!/usr/bin/bash", "#!/bin/bash"]
+
+
+def test_file(hsh, checker, test_path, results):
+    """Test a single bash file and update global counters."""
+    print(f"\033[33m-- queued for testing:\033[0m {test_path}")
+
+    output = subprocess.getoutput(f"bash {checker} --valgrind {hsh} {test_path}")
+
+    result = {"path": test_path}
+    with lock:
+        if output == "OK":
+            result["status"] = "OK"
+        else:
+            result["status"] = "ERROR"
+        results.append(result)
+
+
+def test_path(executor, hsh, checker, path, results):
+    """Test files in a given directory path."""
+    if is_bash_script(path):
+        executor.submit(test_file, hsh, checker, path, results)
+    elif os.path.isdir(path):
+        for subdir, _, files in os.walk(path):
+            for file in files:
+                full_path = os.path.join(subdir, file)
+                if is_bash_script(full_path):
+                    executor.submit(test_file, hsh, checker, full_path, results)
+
+
+def main():
+    if len(os.sys.argv) < 4:
+        print("Usage: <script_name> <hsh> <checker_script> <tests...>")
+        return
+
+    hsh, checker, *tests = os.sys.argv[1:]
+
+    results = []
+
+    with ThreadPoolExecutor() as executor:
+        for test in tests:
+            test_path(executor, hsh, checker, test, results)
+
+    OK = sum(1 for result in results if result["status"] == "OK")
+    ERROR = len(results) - OK
+
+    for result in results:
+        status = result["status"]
+        path = result["path"]
+        print(f"\033[34m-- tested:\033[0m {path}")
+        if status == "OK":
+            print("\033[32mOK\033[0m\n")
+        else:
+            print("\033[31mERROR\033[0m\n")
+            print(f"to see the error run this command:")
+            print(f"$ {checker} --valgrind {hsh} {path}\n")
+
+    print(
+        f"\033[34mTESTS\033[0m={OK + ERROR} \033[32mDONE\033[0m={OK} \033[31mFAILED\033[0m={ERROR}"
+    )
+
+
+if __name__ == "__main__":
+    main()
