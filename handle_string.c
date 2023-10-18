@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+ * _strdup - Duplicate a string in memory.
+ * @src: The source string to duplicate.
+ *
+ * Return: Pointer to the newly duplicated string.
+ */
 char *_strdup(char *src)
 {
 	char *str;

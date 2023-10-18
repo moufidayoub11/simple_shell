@@ -2,12 +2,12 @@
 
 
 /**
-* shell_loop - main shell loop
-*
-* @state: the state of the shell
-*
-* Return: 0 on success, 1 on error, or error code
-*/
+ * shell_loop - main shell loop
+ *
+ * @state: the state of the shell
+ *
+ * Return: 0 on success, 1 on error, or error code
+ */
 int shell_loop(state_t *state)
 {
 	int built_in_ret = -1;
@@ -33,7 +33,7 @@ int shell_loop(state_t *state)
 						if (state->exit_number != -1)
 							state->status = state->exit_number;
 						break;
-						}
+					}
 				}
 				else
 				{
@@ -52,12 +52,12 @@ int shell_loop(state_t *state)
 }
 
 /**
-* get_commands - Set the line property in state
-*
-* @state: the state of the shell
-*
-* Return: the line in state, NULL if failed
-*/
+ * get_commands - Set the line property in state
+ *
+ * @state: the state of the shell
+ *
+ * Return: the line in state, NULL if failed
+ */
 char **get_commands(state_t *state)
 {
 	char **argv;
@@ -85,12 +85,12 @@ char **get_commands(state_t *state)
 
 
 /**
-* get_line - Set the line property in state
-*
-* @state: the state of the shell
-*
-* Return: the line in state, NULL if failed
-*/
+ * get_line - Set the line property in state
+ *
+ * @state: the state of the shell
+ *
+ * Return: the line in state, NULL if failed
+ */
 char *get_line(state_t *state)
 {
 	int r;
