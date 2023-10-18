@@ -21,7 +21,6 @@ int shell_loop(state_t *state)
 			break;
 		}
 		state->line_count++;
-
 		if (get_commands(state) == NULL)
 		{
 			if (state->argv[0])
@@ -35,7 +34,6 @@ int shell_loop(state_t *state)
 							state->status = state->exit_number;
 						break;
 						}
-
 				}
 				else
 				{
@@ -46,9 +44,7 @@ int shell_loop(state_t *state)
 			free_state(state);
 			continue;
 		}
-
 		execute_command(state);
-
 		free_state(state);
 	}
 	free_state(state);

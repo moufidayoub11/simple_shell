@@ -54,7 +54,7 @@ void free_state(state_t *state)
 
 /**
  * _atoi - converts a string to an integer
- * 
+ *
  * @s: the string to be converted
  *
  * Return: number, -1 if error

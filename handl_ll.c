@@ -1,12 +1,9 @@
 #include "main.h"
-
-
 /**
  * add_node_end - Function that adds a new node at the end of a ll
  *
  * @head: the head of a ll
  * @str: the value of the node
- * @index: the index of the node
  *
  * Return: the number of nodes
  */
@@ -170,30 +167,6 @@ size_t print_list(const list_t *h)
 
 		printf("%s\n", value);
 
-		h = h->next;
-		numberOfNodes++;
-	}
-
-	return (numberOfNodes);
-}
-
-/**
- * list_len - Function that counts nodes i ll
- *
- * @h: the linked list
- *
- * Return: the number of nodes
- */
-
-size_t list_len(const list_t *h)
-{
-	size_t numberOfNodes = 0;
-
-	if (!h)
-		return (0);
-
-	while (h)
-	{
 		h = h->next;
 		numberOfNodes++;
 	}

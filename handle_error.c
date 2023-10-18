@@ -4,7 +4,7 @@
  * print_error - prints an error message
  *
  * @state: the state of the shell
- * @estr: string containing specified error type
+ * @error: string containing specified error type
  * Return: 0 if no numbers in string, converted number otherwise
  *        -1 on error
  */

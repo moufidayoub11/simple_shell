@@ -4,8 +4,6 @@
  * execute_command - executs a command
  *
  * @state: the state of the shell
- * @path: the path to the command
- * @command: the command
  *
  * Return: void
  */
@@ -58,7 +56,7 @@ char *locate_path(char *path_string, char *command)
 
 	if ((starts_with(command, ".") || starts_with(command, "/"))
 	&& check_executable(command))
-		return _strdup(command);
+		return (_strdup(command));
 
 	tokens = split(path_string, ":");
 
@@ -75,7 +73,7 @@ char *locate_path(char *path_string, char *command)
 		if (check_executable(full_path))
 		{
 			free_array(tokens, 0);
-			return full_path;
+			return (full_path);
 		}
 
 		free(full_path);
