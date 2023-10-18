@@ -2,7 +2,7 @@
 
 int main(int ac, char **av)
 {
-	state_t state[] = {{NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+	state_t state[] = {{NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0},
 	{NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0}};
 
 	(void) ac;
