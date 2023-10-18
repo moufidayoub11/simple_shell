@@ -11,7 +11,7 @@
  * Return: the number of nodes
  */
 
-list_t *add_node_end(list_t **head, char *str, int index)
+list_t *add_node_end(list_t **head, char *str)
 {
 	list_t *temp;
 	list_t *new;

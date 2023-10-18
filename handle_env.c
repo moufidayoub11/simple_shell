@@ -96,7 +96,7 @@ int _setenv(state_t *state, char *name, char *value)
 		}
 		node = node->next;
 	}
-	add_node_end(&(state->env_list), temp, 0);
+	add_node_end(&(state->env_list), temp);
 	free(temp);
 	state->environ_changed = 1;
 	return (0);
@@ -134,7 +134,7 @@ int init_env_list(state_t *state)
 	size_t i;
 
 	for (i = 0; environ[i]; i++)
-		add_node_end(&node, environ[i], i);
+		add_node_end(&node, environ[i]);
 	state->env_list = node;
 	return (0);
 }

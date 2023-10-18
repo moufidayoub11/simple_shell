@@ -51,8 +51,6 @@ typedef struct state_s
 	int exit_number;
 } state_t;
 
-#define STATE_INIT {NULL, NULL, NULL, NULL, NULL, 0, 0 , 0, 0}
-
 /**
  *struct builtin - contains a builtin string and related function
  *@type: the builtin command flag
@@ -87,7 +85,7 @@ char **get_environ(state_t *state);
 
 
 /* Linked List handlers */
-list_t *add_node_end(list_t **head, char *str, int index);
+list_t *add_node_end(list_t **head, char *str);
 size_t print_list(const list_t *h);
 char **list_to_strings(list_t *head);
 int delete_node_at_index(list_t **head, unsigned int index);
@@ -95,7 +93,7 @@ size_t list_len(const list_t *h);
 void free_list(list_t *head);
 
 /* Command Handlers */
-char *locate_path(state_t *state, char *path_string, char *command);
+char *locate_path(char *path_string, char *command);
 int check_executable(char *file_path);
 void execute_command(state_t *state);
 int find_builtin(state_t *state);

@@ -42,14 +42,12 @@ void execute_command(state_t *state)
 
 /**
  * locate_path - finds this cmd in the PATH string
- *
- * @state: the info struct
  * @path_string: the PATH string
  * @command: the cmd to find
  *
  * Return: full path of cmd if found or NULL
  */
-char *locate_path(state_t *state, char *path_string, char *command)
+char *locate_path(char *path_string, char *command)
 {
 	char **tokens, *full_path;
 	int i;

@@ -11,6 +11,7 @@
 int shell_loop(state_t *state)
 {
 	int built_in_ret = -1;
+
 	while (1)
 	{
 		if (get_line(state) == NULL)
@@ -65,7 +66,6 @@ char **get_commands(state_t *state)
 {
 	char **argv;
 	char *command;
-	int built_in_ret = -1;
 
 	if (!state->line)
 		return (NULL);
@@ -76,7 +76,7 @@ char **get_commands(state_t *state)
 
 	state->argv = argv;
 
-	command = locate_path(state, _getenv(state, "PATH"), argv[0]);
+	command = locate_path(_getenv(state, "PATH"), argv[0]);
 
 	if (!command)
 	{

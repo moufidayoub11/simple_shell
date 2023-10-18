@@ -2,7 +2,9 @@
 
 void free_array(char **array, int start)
 {
-	for (int i = start; array[i] != NULL; i++)
+	int i;
+
+	for (i = start; array[i] != NULL; i++)
 	{
 		free(array[i]);
 	}
@@ -12,7 +14,9 @@ void free_array(char **array, int start)
 
 void print_array(char **array)
 {
-	for (int i = 0; array[i] != NULL; i++)
+	int i;
+
+	for (i = 0; array[i] != NULL; i++)
 	{
 		printf("[%d] -> %s", i, array[i]);
 	}
